@@ -62,7 +62,7 @@ def select_from_db():
     queryString="""
     SELECT name FROM Sheets 
     """
-    cur conn.cursor()
+    cur = conn.cursor()
     Array = cur.execute(quaryString).fetchell()
     return Array
 
