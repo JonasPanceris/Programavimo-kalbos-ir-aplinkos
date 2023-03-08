@@ -34,14 +34,16 @@ def createDB():
     )"""
 
     cursor.execute(createTableString)
+    cursor.execute(createNotesTableString)
 
 def insent_into_to():
-    global connection
+    conn=sglite3.connect("./NotesDatabase.db")
     queryString = """
         INSERT INTO Sheets (Name) VALUES (?) 'text'
     """
-    cur = connection.cursor()
+    cur = conn.cursor()
     cur.execute(queryString,('text',)) 
+    conn.commit()
 
 
 if __name__ =="__main__":
