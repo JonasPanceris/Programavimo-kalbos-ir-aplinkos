@@ -23,7 +23,8 @@ def notes():
             print(Array)
         return render_template('./notes.html',note=Array)
     else:
-        return render_template('./notes.html',note=Array)
+        Array_2 = select_from_db()
+        return render_template('./notes.html',note=Array_2)
     
 def createDB():
 
@@ -56,6 +57,14 @@ def insent_into_db(note):
     cur.execute(queryString,('text',)) 
     connection.commit()
 
+def select_from_db():
+    conn=sqlite3.connect("./NotesDatabase.db")
+    queryString="""
+    SELECT name FROM Sheets 
+    """
+    cur conn.cursor()
+    Array = cur.execute(quaryString).fetchell()
+    return Array
 
 if __name__ =="__main__":
     createDB()
