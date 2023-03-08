@@ -12,6 +12,7 @@ def mano_funkcija():
     global kintamasis
     return render_template('Web_uzrasine.html',kintamasis=kintamasis)
 
+
 @app.route("/notes",mothods=["GET","POST"])
 def notes():
     if(request.method == "POST"):
@@ -21,10 +22,9 @@ def notes():
             Array.append(args)
             insert_into_db(args)
             print(Array)
-        return render_template('./notes.html',note=Array)
+        return render_template('./notes.html',note=select_from_db())
     else:
-        Array_2 = select_from_db()
-        return render_template('./notes.html',note=Array_2)
+        return render_template('./notes.html',note=select_from_db())
     
 def createDB():
 
