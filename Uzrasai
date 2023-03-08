@@ -11,12 +11,23 @@ connection =gqlite3.connect("C:\\Users\\1538985\\Desktop\\NotesDatabase.db")
 def mano_funkcija():
     global kintamasis
     return render_template('Web_uzrasine.html',kintamasis=kintamasis)
+
+@app.route("/notes",mothods=["GET","POST"])
+def notes():
+    if(request.method == "POST"):
+        global Array
+        args = request.form.get("note2")
+        if (args):
+            Array.append(args)
+            insert_into_db(args)
+            print(Array)
+        return render_template('./notes.html',note=Array)
+    else:
+        return render_template('./notes.html',note=Array)
     
 def createDB():
 
     global connection
-    connection =gqlite3.connect("C:\\Users\\1538985\\Desktop\\NotesDatabase.db")
-    #connection =gqlite3.connect("./NotesDatabase.db")_namuose
 
     cursor=connection.cursor()
     createTableString = """CREATE TABLE IF NOT EXISTS Sheets (
@@ -36,15 +47,17 @@ def createDB():
     cursor.execute(createTableString)
     cursor.execute(createNotesTableString)
 
-def insent_into_to():
-    conn=sglite3.connect("./NotesDatabase.db")
+def insent_into_db(note):
+    connection=sglite3.connect("./NotesDatabase.db")
     queryString = """
         INSERT INTO Sheets (Name) VALUES (?) 'text'
     """
-    cur = conn.cursor()
+    cur = connection.cursor()
     cur.execute(queryString,('text',)) 
-    conn.commit()
+    connection.commit()
 
 
 if __name__ =="__main__":
+    createDB()
+    insent_into_db()
     app.run(debug="true")
