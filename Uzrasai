@@ -1,0 +1,48 @@
+from flask import Flask, render_template,request
+import gqlite3
+app = Flask(__name__,static_url_path='')
+kintamasis = " "
+Array = []
+
+connection =gqlite3.connect("C:\\Users\\1538985\\Desktop\\NotesDatabase.db")
+    #connection =gqlite3.connect("./NotesDatabase.db")_namuose
+
+@app.route("/")
+def mano_funkcija():
+    global kintamasis
+    return render_template('Web_uzrasine.html',kintamasis=kintamasis)
+    
+def createDB():
+
+    global connection
+    connection =gqlite3.connect("C:\\Users\\1538985\\Desktop\\NotesDatabase.db")
+    #connection =gqlite3.connect("./NotesDatabase.db")_namuose
+
+    cursor=connection.cursor()
+    createTableString = """CREATE TABLE IF NOT EXISTS Sheets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        Name TEXT NOT NULL
+    )
+    """
+    cursorNotes=connection.cursor()
+    createNotesTableString = """CREATE TABLE IF NOT EXISTS Sheets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        SheatId,
+        Heder TEXT,
+        Text TEXT,
+        FOREIGO KEY (SheetId) REFERENCES Sheet(Id)
+    )"""
+
+    cursor.execute(createTableString)
+
+def insent_into_to():
+    global connection
+    queryString = """
+        INSERT INTO Sheets (Name) VALUES (?) 'text'
+    """
+    cur = connection.cursor()
+    cur.execute(queryString,('text',)) 
+
+
+if __name__ =="__main__":
+    app.run(debug="true")
