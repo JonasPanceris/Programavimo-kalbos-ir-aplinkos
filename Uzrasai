@@ -90,8 +90,14 @@ def register():
 def creationREG():
     global connection
     cursor=connection.cursor()
+    createRegTableString="""CREATE TABLE IF NOT EXISTS Sheets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        Name TEXT NOT NULL
     
+    )"""
 
+    cursor.execute(createRegTableString)
+    cursor.execute(createRegNotesTableString)
 
 
 if __name__ =="__main__":
