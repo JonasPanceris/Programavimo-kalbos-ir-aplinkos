@@ -3,7 +3,7 @@ import sqlite3
 
 variable=0
 Array = []
-connection =sqlite3.connect("C:\\Users\\1538985\\Desktop\\NotesDatabase.db")
+connection =sqlite3.connect("./NotesDatabase.db")
  #connection =gqlite3.connect("./NotesDatabase.db")_namuose
 app = Flask(__name__,static_url_path='')
 
