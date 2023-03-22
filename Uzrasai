@@ -71,7 +71,7 @@ def select_from_db():
     SELECT name FROM Sheets 
     """
     cur = conn.cursor()
-    cur.execute(quaryString).fetchell()
+    cur.execute(queryString).fetchell()
     return Array
 
 @app.route("/register")
@@ -127,5 +127,4 @@ def select_from_REG():
 
 if __name__ =="__main__":
     createDB()
-    insent_into_db()
     app.run(debug="true")
