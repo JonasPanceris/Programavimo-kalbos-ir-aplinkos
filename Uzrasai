@@ -23,8 +23,7 @@ def plus_one():
     variable = variable +1 
     return str (variable)
 
-
-@app.route("/notes",mothods=["GET","POST"])
+@app.route("/notes",methods=["GET","POST"])
 def notes():
     if(request.method == "POST"):
         global Array
@@ -50,7 +49,7 @@ def createDB():
         SheatId INTEGER ID,
         Heder TEXT,
         Text TEXT,
-        FOREIGO KEY (SheetId) REFERENCES Sheet(Id)
+        FOREIGN KEY (SheetID) REFERENCES Sheet(Id)
     )"""
 
     cursor.execute(createTableString)
