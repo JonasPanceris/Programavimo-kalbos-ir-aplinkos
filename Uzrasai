@@ -107,7 +107,23 @@ def creationREG():
         FOREIGN KEY (SheetID) REFERENCES Seets(id)
     }"""
 
+def insert_into_REG(note):
+    conn=sqlite3.connect("./RegNotesDatabase.db")
+    queryString="""
+        INSERT INTO Sheet (Name) VALIUES (?)
+    """
 
+    cur = conn.cursor()
+    cur.execute(queryString, (note,))
+
+def select_from_REG():
+    conn=sqlite3.connect("./RegNotesDatabase.db")
+    queryString="""
+        SELECT name FROM Sheets
+    """
+    cur = conn.cursor()
+    cur.execute(queryString).fetchall()
+    return Array
 
 if __name__ =="__main__":
     createDB()
