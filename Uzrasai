@@ -40,16 +40,15 @@ def createDB():
     global connection
     cursor=connection.cursor()
     createTableString = """CREATE TABLE IF NOT EXISTS Sheets (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        Id INTEGER PRIMARY KEY AUTOINCREMENT,
         Name TEXT NOT NULL
     )
     """
     createNotesTableString = """CREATE TABLE IF NOT EXISTS Notes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        Id INTEGER PRIMARY KEY AUTOINCREMENT,
         SheatId INTEGER ID,
-        Heder TEXT,
-        Text TEXT,
-        FOREIGN KEY (SheetID) REFERENCES Sheet(Id)
+        Header TEXT,
+        Text TEXT
     )"""
 
     cursor.execute(createTableString)
