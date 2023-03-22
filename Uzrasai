@@ -38,19 +38,16 @@ def notes():
         return render_template('./notes.html',note=select_from_db())
     
 def createDB():
-
     global connection
-
     cursor=connection.cursor()
     createTableString = """CREATE TABLE IF NOT EXISTS Sheets (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         Name TEXT NOT NULL
     )
     """
-    cursorNotes=connection.cursor()
-    createNotesTableString = """CREATE TABLE IF NOT EXISTS Sheets (
+    createNotesTableString = """CREATE TABLE IF NOT EXISTS Notes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        SheatId,
+        SheatId INTEGER ID,
         Heder TEXT,
         Text TEXT,
         FOREIGO KEY (SheetId) REFERENCES Sheet(Id)
@@ -59,13 +56,13 @@ def createDB():
     cursor.execute(createTableString)
     cursor.execute(createNotesTableString)
 
-def insent_into_db(note):
-    connection=sqlite3.connect("./NotesDatabase.db")
+def insert_into_db(note):
+    conn=sqlite3.connect("./NotesDatabase.db")
     queryString = """
-        INSERT INTO Sheets (Name) VALUES (?) 'text'
+        INSERT INTO Sheets (Name) VALUES (?) 
     """
-    cur = connection.cursor()
-    cur.execute(queryString,('text',)) 
+    cur = conn.cursor()
+    cur.execute(queryString,(note,)) 
     connection.commit()
 
 def select_from_db():
@@ -74,8 +71,28 @@ def select_from_db():
     SELECT name FROM Sheets 
     """
     cur = conn.cursor()
-    Array = cur.execute(quaryString).fetchell()
+    cur.execute(quaryString).fetchell()
     return Array
+
+@app.route("/register")
+def register():
+    if(request.method == "POST")
+        global Array
+        args = request.form.get("reg1") 
+        if(args)
+            Array.append(args)
+            insert_into_REG(args)
+            print(args)
+            return render_template('/register.html', note=select_from_REG())
+    else:
+        return render_template('/register.html', note=select_from_REG())
+    
+def creationREG():
+    global connection
+    cursor=connection.cursor()
+    
+
+
 
 if __name__ =="__main__":
     createDB()
