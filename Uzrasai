@@ -76,10 +76,10 @@ def select_from_db():
 
 @app.route("/register")
 def register():
-    if(request.method == "POST")
+    if(request.method == "POST"):
         global Array
         args = request.form.get("reg1") 
-        if(args)
+        if(args):
             Array.append(args)
             insert_into_REG(args)
             print(args)
@@ -98,6 +98,15 @@ def creationREG():
 
     cursor.execute(createRegTableString)
     cursor.execute(createRegNotesTableString)
+
+    createRegNotesTableString="""CREATE TABLE IF NOT EXISTS register( 
+        id  INTEGER PRIMARY KEY AUTOINCREMENT,
+        SheetID INTEGER ID,
+        Header TEXT,
+        Text TEXT,
+        FOREIGN KEY (SheetID) REFERENCES Seets(id)
+    }"""
+
 
 
 if __name__ =="__main__":
